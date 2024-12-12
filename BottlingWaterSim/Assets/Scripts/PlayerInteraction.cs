@@ -32,7 +32,12 @@ public class PlayerInteraction : MonoBehaviour
             IInteractable interactable = hit.collider.GetComponent<IInteractable>();
             if (interactable != null)
             {
-                if(Input.GetKeyDown(KeyCode.E))
+                if (!txtMessage.gameObject.activeSelf)
+                {
+                    txtMessage.gameObject.SetActive(true);
+                }
+
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     interactable.Interact();                    
                 }

@@ -13,19 +13,21 @@ public class NPCController : MonoBehaviour
     [SerializeField] private BottleHolder bottleHolder;
 
     private bool waitingForBottle;
+    private bool walkingToEnd;
 
     private WAYPOINT waypoint_status;
 
     private void Awake()
     {
         waitingForBottle = false;
+        walkingToEnd = false;
 
         SetSpawnPoint();
     }
 
     private void Update()
     {
-        if(agent.remainingDistance > agent.stoppingDistance)
+        if(agent.remainingDistance > agent.stoppingDistance || agent.pathPending)
         {
             return;
         }
@@ -37,7 +39,10 @@ public class NPCController : MonoBehaviour
 
         if(waypoint_status == WAYPOINT.END)
         {
-            SetSpawnPoint();
+            if(Vector3.Distance(agent.transform.position, GetWaypoint(WAYPOINT.END).waypoint.position) <= 1)
+            {
+                SetSpawnPoint();
+            }            
         }
     }
 
@@ -60,7 +65,10 @@ public class NPCController : MonoBehaviour
         waypoint_status = WAYPOINT.SPAWN_POINT;
 
         agent.transform.position = GetWaypoint(WAYPOINT.SPAWN_POINT).waypoint.position;
+
         SetStandPoint();
+
+        walkingToEnd = false;
     }
 
     private void SetStandPoint()
@@ -72,10 +80,11 @@ public class NPCController : MonoBehaviour
 
     private void SetEndPoint()
     {
-
-        waitingForBottle = false;
-        agent.SetDestination(GetWaypoint(WAYPOINT.END).waypoint.position);
         waypoint_status = WAYPOINT.END;
+
+        agent.SetDestination(GetWaypoint(WAYPOINT.END).waypoint.position);
+        waitingForBottle = false;
+        walkingToEnd = true;
     }
 
     private Waypoint GetWaypoint(WAYPOINT newWaypoint)
@@ -87,6 +96,9 @@ public class NPCController : MonoBehaviour
     {
         SetEndPoint();
         bottleHolder.GrabBottle();
+
+        MoneyManager.Instance.AddMoney(10);
+        CustomersManager.Instance.AddCustomers(1);
     }
 
     private void WaitGrabBottle()
