@@ -15,7 +15,7 @@ public class NPCController : MonoBehaviour
     private bool waitingForBottle;
     private bool walkingToEnd;
 
-    private WAYPOINT waypoint_status;
+    private WAYPOINT currentWaypoint;
 
     private void Awake()
     {
@@ -32,17 +32,17 @@ public class NPCController : MonoBehaviour
             return;
         }
 
-        if (!waitingForBottle && waypoint_status == WAYPOINT.STAND)
+        if (!waitingForBottle && currentWaypoint == WAYPOINT.STAND)
         {
             TryTakeBottle();
         }
 
-        if(waypoint_status == WAYPOINT.END)
+        if(currentWaypoint == WAYPOINT.END)
         {
             if(Vector3.Distance(agent.transform.position, GetWaypoint(WAYPOINT.END).waypoint.position) <= 1)
             {
                 SetSpawnPoint();
-            }            
+            }
         }
     }
 
@@ -62,7 +62,7 @@ public class NPCController : MonoBehaviour
 
     private void SetSpawnPoint()
     {
-        waypoint_status = WAYPOINT.SPAWN_POINT;
+        currentWaypoint = WAYPOINT.SPAWN_POINT;
 
         agent.transform.position = GetWaypoint(WAYPOINT.SPAWN_POINT).waypoint.position;
 
@@ -73,14 +73,14 @@ public class NPCController : MonoBehaviour
 
     private void SetStandPoint()
     {
-        waypoint_status = WAYPOINT.STAND;
+        currentWaypoint = WAYPOINT.STAND;
 
         agent.SetDestination(GetWaypoint(WAYPOINT.STAND).waypoint.position);
     }
 
     private void SetEndPoint()
     {
-        waypoint_status = WAYPOINT.END;
+        currentWaypoint = WAYPOINT.END;
 
         agent.SetDestination(GetWaypoint(WAYPOINT.END).waypoint.position);
         waitingForBottle = false;

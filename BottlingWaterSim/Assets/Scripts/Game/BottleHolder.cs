@@ -22,7 +22,12 @@ public class BottleHolder : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if(currentIndex >= bottles.Length)
+        if(!Input.GetKeyDown(KeyCode.E))
+        {
+            return;
+        }
+
+        if(currentIndex >= bottles.Length || !bottleToInteract.IsActive() || bottleToInteract.GetStatus() != BOTTLE_STATUS.FULL)
         {
             return;
         }

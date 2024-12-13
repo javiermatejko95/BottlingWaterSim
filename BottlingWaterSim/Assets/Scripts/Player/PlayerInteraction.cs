@@ -37,10 +37,12 @@ public class PlayerInteraction : MonoBehaviour
                     txtMessage.gameObject.SetActive(true);
                 }
 
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    interactable.Interact();                    
-                }
+                interactable.Interact();
+
+                //if (Input.GetKeyDown(KeyCode.E))
+                //{
+                //    interactable.Interact();                    
+                //}
             }
         }
         else

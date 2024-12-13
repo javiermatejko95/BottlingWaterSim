@@ -5,8 +5,15 @@ using UnityEngine;
 public class Tap : MonoBehaviour, IInteractable
 {
     [SerializeField] private WaterBottle bottleToInteract;
+    [SerializeField] private float speedToFill = 0.1f;
+
     public void Interact()
     {
-        bottleToInteract.Fill();        
+        if (!Input.GetKey(KeyCode.E))
+        {
+            return;
+        }
+
+        bottleToInteract.Fill(speedToFill * Time.deltaTime);                    
     }
 }
