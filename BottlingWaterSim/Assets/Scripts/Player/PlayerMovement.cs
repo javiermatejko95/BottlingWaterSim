@@ -17,14 +17,23 @@ public class PlayerMovement : MonoBehaviour
 
     private float xRotation = 0f;
 
+    private bool canMove;
+
     void Awake()
     {
+        CursorManager.Instance.OnChangeCursorState += HandleOnChangeCursorState;
+
         controller = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
+        CursorManager.Instance.SetCursorStatus(CursorLockMode.Locked);
     }
 
     void Update()
     {
+        if(!canMove)
+        {
+            return;
+        }
+
         isGrounded = controller.isGrounded;
         if (isGrounded && velocity.y < 0)
         {
@@ -53,5 +62,10 @@ public class PlayerMovement : MonoBehaviour
 
         playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
+    }
+
+    private void HandleOnChangeCursorState(bool status)
+    {
+        canMove = status;
     }
 }

@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaterBottle : MonoBehaviour
 {
-    [SerializeField] private GameObject bottleCapEmpty;
-    //[SerializeField] private GameObject bottleCapFull;
+    [SerializeField] private GameObject bottleCap;
 
     [SerializeField] private BOTTLE_STATUS status = default;
 
@@ -14,7 +14,14 @@ public class WaterBottle : MonoBehaviour
     [SerializeField] private Color emptyColor;
     [SerializeField] private Color fullColor;
 
+    [SerializeField] private Image imgLoadingWheel;
+
     private float currentFullness = 0f;
+
+    private void Awake()
+    {
+        imgLoadingWheel.fillAmount = 0f;
+    }
 
     public void Grab()
     {
@@ -26,9 +33,6 @@ public class WaterBottle : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E))
         {
             gameObject.SetActive(true);
-
-            //bottleCapEmpty.SetActive(true);
-            //bottleCapFull.SetActive(false);
 
             status = BOTTLE_STATUS.EMPTY;
 
@@ -49,16 +53,22 @@ public class WaterBottle : MonoBehaviour
 
         renderer.material.color = Color.Lerp(emptyColor, fullColor, t);
 
+        imgLoadingWheel.fillAmount = t;
+
         if (currentFullness >= 1f)
         {
-            //bottleCapEmpty.SetActive(false);
-            //bottleCapFull.SetActive(true);
-
             status = BOTTLE_STATUS.FULL;
+
+            imgLoadingWheel.fillAmount = 0;
 
             Debug.Log("Filled the bottle");
         }        
-    }    
+    }
+
+    public void StopFilling()
+    {
+        imgLoadingWheel.fillAmount = 0;
+    }
 
     public void Drop()
     {
@@ -68,8 +78,6 @@ public class WaterBottle : MonoBehaviour
         }
 
         gameObject.SetActive(false);
-        //bottleCapEmpty.SetActive(true);
-        //bottleCapFull.SetActive(false);
 
         status = BOTTLE_STATUS.NONE;
         currentFullness = 0f;

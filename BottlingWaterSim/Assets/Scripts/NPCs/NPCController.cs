@@ -97,7 +97,7 @@ public class NPCController : MonoBehaviour
         SetEndPoint();
         bottleHolder.GrabBottle();
 
-        MoneyManager.Instance.AddMoney(10);
+        MoneyManager.Instance.UpdateMoney(10);
         CustomersManager.Instance.AddCustomers(1);
     }
 

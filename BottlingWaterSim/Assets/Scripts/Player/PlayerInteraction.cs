@@ -14,6 +14,15 @@ public class PlayerInteraction : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI txtMessage;
 
+    private bool canInteract;
+
+    private void Awake()
+    {
+        CursorManager.Instance.OnChangeCursorState += HandleOnChangeCursorState;
+
+        canInteract = true;
+    }
+
     private void Update()
     {
         Interact();
@@ -21,6 +30,11 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Interact()
     {
+        if(!canInteract)
+        {
+            return;
+        }
+
         Ray ray = new Ray(camera.transform.position, camera.transform.forward);
 
         RaycastHit hit;
@@ -54,5 +68,8 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-
+    private void HandleOnChangeCursorState(bool status)
+    {
+        canInteract = status;
+    }
 }
