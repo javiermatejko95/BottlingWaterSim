@@ -14,8 +14,8 @@ public class ObjectSO : ScriptableObject
     [SerializeField] private float startingValue;
     [SerializeField] private float valueScale;
 
-    [SerializeField] private int startingCost;
-    [SerializeField] private int costScale;
+    [SerializeField] private int startingUpgradeCost;
+    [SerializeField] private int upgradeCostScale;
 
     public OBJECT_DATATYPE Type { get => type; }
 
@@ -26,8 +26,8 @@ public class ObjectSO : ScriptableObject
     public float StartingValue { get => startingValue; }
     public float ValueScale { get => valueScale; }
 
-    public int StartingCost { get => startingCost; }
-    public int CostScale { get => costScale; }
+    public int StartingUpgradeCost { get => startingUpgradeCost; }
+    public int UpgradeCostScale { get => upgradeCostScale; }
 }
 
 public enum OBJECT_DATATYPE

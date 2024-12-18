@@ -9,7 +9,6 @@ public class Tap : MonoBehaviour, IInteractable, IUpgradeable
     [SerializeField] private WaterBottle bottleToInteract;
     [SerializeField] private ObjectSO objectSO;
 
-    private float fillingRate;
     private ObjectData objectData;
 
     private void Awake()
@@ -20,16 +19,14 @@ public class Tap : MonoBehaviour, IInteractable, IUpgradeable
             CurrentLevel = objectSO.StartingLevel,
             CurrentValue = objectSO.StartingValue,
             ValueScale = objectSO.ValueScale,
-            CurrentCost = objectSO.StartingCost,
-            CostScale = objectSO.CostScale,
+            UpgradeCost = objectSO.StartingUpgradeCost,
+            UpgradeCostScale = objectSO.UpgradeCostScale,
         };
-
-        fillingRate = objectData.CurrentValue;
     }
 
     public void ApplyUpgrade()
     {
-        fillingRate = objectData.CurrentValue;
+        objectData.LevelUp();
     }
 
     public void Interact()
@@ -46,12 +43,17 @@ public class Tap : MonoBehaviour, IInteractable, IUpgradeable
 
         if(Input.GetKeyDown(KeyCode.O))
         {
-            ShopManager.Instance.Setup(objectData, ApplyUpgrade);
+            ShopManager.Instance.Setup(objectData);
         }
+    }
+
+    public ObjectData GetObjectData()
+    {
+        return objectData;
     }
 
     private void Use()
     {
-        bottleToInteract.Fill(fillingRate * Time.deltaTime);
-    }
+        bottleToInteract.Fill(objectData.CurrentValue * Time.deltaTime);
+    }    
 }

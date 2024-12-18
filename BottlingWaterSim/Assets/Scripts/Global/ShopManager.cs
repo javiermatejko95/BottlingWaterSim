@@ -10,7 +10,7 @@ public class ShopManager : Singleton<ShopManager>
     [SerializeField] private GameObject shopUI;
     [SerializeField] private ShopItem itemPrefab;
 
-    [SerializeField] private TextMeshProUGUI txtName;
+    //[SerializeField] private TextMeshProUGUI txtName;
     [SerializeField] private GameObject itemsContainer;
 
     [SerializeField] private TextMeshProUGUI txtMoney;
@@ -27,12 +27,12 @@ public class ShopManager : Singleton<ShopManager>
         MoneyManager.Instance.OnUpdateMoney += UpdateMoney;
     }
 
-    public void Setup(ObjectData objectData, Action onFinish)
+    public void Setup(ObjectData objectData)
     {
-        txtName.text = objectData.Id;
+        //txtName.text = objectData.Id;
 
         ShopItem shopItem = Instantiate(itemPrefab, itemsContainer.transform);
-        shopItem.Setup(objectData, onFinish);
+        shopItem.Setup(objectData);
         currentItems.Add(shopItem);
 
         //for (int i = 0; i < objectData.Length; i++)
@@ -45,16 +45,15 @@ public class ShopManager : Singleton<ShopManager>
         Open();
     }
 
-    public bool BuyUpgrade(ObjectData objectData)
+    public void BuyUpgrade(ObjectData data, Action<ObjectData> onFinishBuyingUpgrade)
     {
-        if(objectData.CurrentCost <= MoneyManager.Instance.CurrentMoney)
+        if(data.UpgradeCost <= MoneyManager.Instance.CurrentMoney)
         {
-            MoneyManager.Instance.RemoveMoney(objectData.CurrentCost);
+            MoneyManager.Instance.RemoveMoney(data.UpgradeCost);
+            UpgradeSystemManager.Instance.ApplyUpgrade(data.Id);
 
-            return true;
+            onFinishBuyingUpgrade?.Invoke(data);
         }
-
-        return false;
     }
 
     public void Open()
@@ -74,7 +73,7 @@ public class ShopManager : Singleton<ShopManager>
             Destroy(currentItems[i].gameObject);
         }
 
-        txtName.text = string.Empty;
+        //txtName.text = string.Empty;
 
         currentItems.Clear();
     }

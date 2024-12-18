@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41d47cc74e346b74bafafc395f473d89, type: 3}
-  m_Name: ObjectData_Tap
+  m_Script: {fileID: 11500000, guid: 1eb39d47d4075864a90cbf28f7f5e5d8, type: 3}
+  m_Name: UpgradeSystem
   m_EditorClassIdentifier: 
-  type: 0
-  id: Tap
-  startingLevel: 1
-  startingValue: 0.1
-  valueScale: 0.1
-  startingUpgradeCost: 5
-  upgradeCostScale: 5
+  upgradeableObjects:
+  - id: Tap
+    upgradeableObject: {fileID: 0}

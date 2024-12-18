@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using System.Linq;
 
 public class ShopItem : MonoBehaviour
 {
@@ -11,38 +12,31 @@ public class ShopItem : MonoBehaviour
     [SerializeField] private Button btnBuy;
     [SerializeField] private TextMeshProUGUI txtLevelCost;
 
-    private ObjectData objectData;
-
-    private Action onBuy;
+    private string id;
+    private int cost;
 
     private void Awake()
     {
         btnBuy.onClick.AddListener(BuyUpgrade);
     }
 
-    public void Setup(ObjectData objectData, Action onFinish)
+    public void Setup(ObjectData objectData)
     {
-        this.objectData = objectData;
-
-        onBuy = onFinish;
+        id = objectData.Id;
+        cost = objectData.UpgradeCost;
 
         UpdateTexts(objectData);
     }
 
     private void BuyUpgrade()
     {
-        if(ShopManager.Instance.BuyUpgrade(objectData))
-        {
-            objectData.LevelUp();
-            onBuy?.Invoke();
-            UpdateTexts(objectData);
-        }
+        ShopManager.Instance.BuyUpgrade(UpgradeSystemManager.Instance.GetObjectData(id), UpdateTexts);
     }
 
     private void UpdateTexts(ObjectData objectData)
     {
         txtName.text = objectData.Id;
 
-        txtLevelCost.text = $"Level {objectData.CurrentLevel} - $ {objectData.CurrentCost}";
+        txtLevelCost.text = $"Level {objectData.CurrentLevel} - $ {objectData.UpgradeCost}";
     }
 }

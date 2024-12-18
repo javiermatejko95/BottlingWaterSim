@@ -95,10 +95,7 @@ public class NPCController : MonoBehaviour
     private void GrabBottle()
     {
         SetEndPoint();
-        bottleHolder.GrabBottle();
-
-        MoneyManager.Instance.UpdateMoney(10);
-        CustomersManager.Instance.AddCustomers(1);
+        bottleHolder.SellBottle();        
     }
 
     private void WaitGrabBottle()
