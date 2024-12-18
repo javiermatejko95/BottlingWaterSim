@@ -1,15 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public class UpgradeSystemManager : Singleton<UpgradeSystemManager>
 {
     [SerializeField] private UpgradeableObject[] upgradeableObjects;
 
     private List<IUpgradeable> upgradeableObjectsList;
-
-    public UpgradeableObject[] UpgradeableObjects { get => upgradeableObjects; }
 
     public void ApplyUpgrade(string id)
     {

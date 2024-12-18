@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 using System;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopManager : Singleton<ShopManager>
 {
@@ -19,8 +18,10 @@ public class ShopManager : Singleton<ShopManager>
 
     private List<ShopItem> currentItems;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         currentItems = new List<ShopItem>();
         btnClose.onClick.AddListener(Close);
 

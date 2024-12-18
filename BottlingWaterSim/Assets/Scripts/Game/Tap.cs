@@ -1,37 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine.UI;
-
-public class Tap : MonoBehaviour, IInteractable, IUpgradeable
+public class Tap : UpgradeableItem
 {
     [SerializeField] private WaterBottle bottleToInteract;
-    [SerializeField] private ObjectSO objectSO;
 
-    private ObjectData objectData;
-
-    private void Awake()
+    public override void Interact()
     {
-        objectData = new ObjectData()
-        {
-            Id = objectSO.Id,
-            CurrentLevel = objectSO.StartingLevel,
-            CurrentValue = objectSO.StartingValue,
-            ValueScale = objectSO.ValueScale,
-            UpgradeCost = objectSO.StartingUpgradeCost,
-            UpgradeCostScale = objectSO.UpgradeCostScale,
-        };
-    }
+        base.Interact();
 
-    public void ApplyUpgrade()
-    {
-        objectData.LevelUp();
-    }
-
-    public void Interact()
-    {
-        if(Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.E))
         {
             Use();
         }
@@ -40,20 +17,11 @@ public class Tap : MonoBehaviour, IInteractable, IUpgradeable
         {
             bottleToInteract.StopFilling();
         }
-
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            ShopManager.Instance.Setup(objectData);
-        }
     }
 
-    public ObjectData GetObjectData()
-    {
-        return objectData;
-    }
-
-    private void Use()
+    protected override void Use()
     {
         bottleToInteract.Fill(objectData.CurrentValue * Time.deltaTime);
     }    
+
 }

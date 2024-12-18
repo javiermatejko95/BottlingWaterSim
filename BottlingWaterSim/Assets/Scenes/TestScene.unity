@@ -3294,8 +3294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6afc34497417a346ad5df7799770d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bottleToInteract: {fileID: 1789690684}
   objectSO: {fileID: 11400000, guid: 26270c9574b1fc84abf05f3d77b605b1, type: 2}
+  bottleToInteract: {fileID: 1789690684}
 --- !u!1 &415243831
 GameObject:
   m_ObjectHideFlags: 0
@@ -8624,6 +8624,8 @@ MonoBehaviour:
     ObjectModel: {fileID: 396220287}
   - Id: BottleHolder
     ObjectModel: {fileID: 2080565292}
+  - Id: Dispenser
+    ObjectModel: {fileID: 6553371028907641095}
 --- !u!1 &1282369956
 GameObject:
   m_ObjectHideFlags: 0
@@ -12992,8 +12994,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2977247cb6896474ca34c3e5e22ac86a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bottleToInteract: {fileID: 1789690684}
   objectSO: {fileID: 11400000, guid: 8f03951354691e045a3384bf4517befb, type: 2}
+  bottleToInteract: {fileID: 1789690684}
   bottles:
   - {fileID: 5608710868903518458}
   - {fileID: 1407735997}
@@ -15855,7 +15857,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1915758, y: 0.3951705, z: 0.15424484}
+  m_Size: {x: 0.1915758, y: 0.3951705, z: 0.1542448}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &4844967645859726706
 MeshFilter:
@@ -17133,7 +17135,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3733e517d7aa65044bf28d3acd072a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectSO: {fileID: 11400000, guid: e9281cd9580860b4da9c75fc5fc8d3b9, type: 2}
   bottleToInteract: {fileID: 1789690684}
+  renderer: {fileID: 9018313342920180183}
+  unavailableColor: {r: 1, g: 1, b: 1, a: 0}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &7395996382793963637
 Transform:
   m_ObjectHideFlags: 0
@@ -17379,7 +17385,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  - {fileID: 2100000, guid: 4ed39e362671b514b9c480900a8db668, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

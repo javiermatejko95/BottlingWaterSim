@@ -30,14 +30,11 @@ public class WaterBottle : MonoBehaviour
             return;
         }
 
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            gameObject.SetActive(true);
+        gameObject.SetActive(true);
 
-            status = BOTTLE_STATUS.EMPTY;
+        status = BOTTLE_STATUS.EMPTY;
 
-            Debug.Log("Grabbed a new bottle");
-        }        
+        Debug.Log("Grabbed a new bottle");
     }
 
     public void Fill(float add)

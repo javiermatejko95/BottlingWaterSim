@@ -7,8 +7,10 @@ public class CursorManager : Singleton<CursorManager>
 {
     public event Action<bool> OnChangeCursorState;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         //TODO: remove when settings are implemented
         Application.targetFrameRate = 144;
     }
