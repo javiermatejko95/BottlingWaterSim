@@ -43,7 +43,19 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, distance, mask))
         {
-            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+            Transform currentParent = hit.collider.transform;
+
+            while (currentParent != null)
+            {
+                if(currentParent.GetComponent<IInteractable>() != null)
+                {
+                    break;
+                }
+
+                currentParent = currentParent.parent;
+            }
+
+            IInteractable interactable = currentParent.GetComponent<IInteractable>();
             if (interactable != null)
             {
                 if (!txtMessage.gameObject.activeSelf)

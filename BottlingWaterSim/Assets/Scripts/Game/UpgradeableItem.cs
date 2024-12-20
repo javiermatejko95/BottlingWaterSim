@@ -5,6 +5,7 @@ using UnityEngine;
 public class UpgradeableItem : MonoBehaviour, IInteractable, IUpgradeable
 {
     [SerializeField] private ObjectSO objectSO;
+    [SerializeField] private GameObject container;
 
     protected ObjectData objectData;
 
@@ -18,12 +19,14 @@ public class UpgradeableItem : MonoBehaviour, IInteractable, IUpgradeable
             ValueScale = objectSO.ValueScale,
             UpgradeCost = objectSO.StartingUpgradeCost,
             UpgradeCostScale = objectSO.UpgradeCostScale,
+            ObjectPrefabs = objectSO.ObjectPrefabs,
         };
     }
 
     public virtual void ApplyUpgrade()
     {
         objectData.LevelUp();
+        SpawnNewLevel();
     }
 
     public virtual ObjectData GetObjectData()
@@ -47,5 +50,12 @@ public class UpgradeableItem : MonoBehaviour, IInteractable, IUpgradeable
     protected virtual void OpenUpgradesShop()
     {
         ShopManager.Instance.Setup(objectData);
+    }
+
+    protected virtual void SpawnNewLevel()
+    {
+        Destroy(container.transform.GetChild(0).gameObject);
+
+        GameObject go = Instantiate(objectData.ObjectPrefabs[objectData.CurrentLevel - 1], container.transform);
     }
 }

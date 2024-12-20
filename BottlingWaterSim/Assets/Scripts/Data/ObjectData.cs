@@ -16,6 +16,8 @@ public class ObjectData
     [SerializeField] private int upgradeCost;
     [SerializeField] private int upgradeCostScale;
 
+    [SerializeField] private GameObject[] objectPrefabs;
+
     public string Id { get => id; set => id = value; }
     public int CurrentLevel { get => currentLevel; set => currentLevel = value; }
 
@@ -25,6 +27,8 @@ public class ObjectData
 
     public int UpgradeCost { get => upgradeCost; set => upgradeCost = value; }
     public int UpgradeCostScale { get => upgradeCostScale; set => upgradeCostScale = value; }
+
+    public GameObject[] ObjectPrefabs { get => objectPrefabs; set => objectPrefabs = value; }
 
     public void LevelUp()
     {

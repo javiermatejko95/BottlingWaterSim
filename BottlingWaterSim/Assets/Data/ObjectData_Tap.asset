@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d47cc74e346b74bafafc395f473d89, type: 3}
   m_Name: ObjectData_Tap
   m_EditorClassIdentifier: 
-  type: 0
   id: Tap
   startingLevel: 1
-  startingValue: 0.1
-  valueScale: 0.1
-  startingUpgradeCost: 5
-  upgradeCostScale: 5
+  startingValue: 0.25
+  valueScale: 0.25
+  startingUpgradeCost: 1500
+  upgradeCostScale: 100
+  objectPrefabs:
+  - {fileID: 305190272375105337, guid: 2dee79d371b05a34f8c0ffc73508fae9, type: 3}
+  - {fileID: 7934557725679758911, guid: 6e9d85c38f4bfdb4081fcb56dfb6beb4, type: 3}
+  - {fileID: 8349424480936624162, guid: b701c0af56e7f664cbf90655945ce4ac, type: 3}

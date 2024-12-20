@@ -3,8 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ObjectData", menuName = "Game Data/Object")]
 public class ObjectSO : ScriptableObject
 {
-    [SerializeField] private OBJECT_DATATYPE type;
-
     [SerializeField] private string id;
 
     [SerializeField] private int startingLevel;
@@ -15,7 +13,7 @@ public class ObjectSO : ScriptableObject
     [SerializeField] private int startingUpgradeCost;
     [SerializeField] private int upgradeCostScale;
 
-    public OBJECT_DATATYPE Type { get => type; }
+    [SerializeField] private GameObject[] objectPrefabs;
 
     public string Id { get => id; }
 
@@ -26,10 +24,6 @@ public class ObjectSO : ScriptableObject
 
     public int StartingUpgradeCost { get => startingUpgradeCost; }
     public int UpgradeCostScale { get => upgradeCostScale; }
-}
-
-public enum OBJECT_DATATYPE
-{
-    RATE,
-    COST,
+    
+    public GameObject[] ObjectPrefabs { get => objectPrefabs; }
 }
